@@ -1,34 +1,44 @@
-# Stage 1: Build the application
-FROM node:18 AS builder
-
-# Set working directory
+# Stage 1: Base image with Bun
+FROM oven/bun:1-slim AS base
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Stage 2: Install dependencies
+FROM base AS install
+COPY package.json bun.lock* ./
+RUN bun install --frozen-lockfile
 
-# Install dependencies
-RUN npm install --production
-
-# Copy the rest of the application code
+# Stage 3: Build the application
+FROM base AS build
+COPY --from=install /app/node_modules ./node_modules
 COPY . .
+RUN bun run build
 
-# Build the TypeScript application
-RUN npm run build
+# Stage 4: Production image
+FROM base AS production
 
-# Stage 2: Create the production image
-FROM node:18 AS production
+# Install curl for health checks
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
-WORKDIR /app
+# Copy production dependencies
+COPY --from=install /app/node_modules ./node_modules
 
-# Copy only the necessary files from builder stage
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
+# Copy built files and configs
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/package.json .
+COPY --from=build /app/.env* ./
 
-# Expose the port if your bot needs to run on one
+# Set environment
+ENV NODE_ENV=production
+
+# Expose the webhook port
 EXPOSE 3000
 
-# Command to run the bot
-CMD ["node", "dist/index.js"]
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/health || exit 1
+
+# Run the application
+USER bun
+CMD ["bun", "run", "dist/index.js"]

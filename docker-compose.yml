@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  discord-bot:
+    build:
+      context: .
+      target: production  # Use the production stage from Dockerfile
+    container_name: discord-bot
+    restart: unless-stopped
+    ports:
+      - "3000:3000"  # Map container port 3000 to host port 3000
+    env_file:
+      - .env  # Load environment variables from .env file
+    volumes:
+      - ./logs:/app/logs  # Optional: for persistent logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - discord-net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+
+networks:
+  discord-net:
+    driver: bridge

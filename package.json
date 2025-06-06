@@ -1,16 +1,16 @@
 {
-  "name": "dify-discord-starter",
+  "name": "discord-bot",
   "version": "0.0.6",
   "description": "A starter project to create discord bots with dify apps.",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "pm2-runtime start dist/index.js --name discord-bot",
     "install-cmd": "ts-node scripts/install.ts",
     "dev": "nodemon",
     "release": "standard-version"
   },
-  "author": "Pascal Malbranche",
+  "author": "Terasumi",
   "license": "MIT",
   "dependencies": {
     "@discordjs/builders": "^1.7.0",
@@ -22,6 +22,7 @@
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
     "express": "^5.1.0",
+    "pm2": "^6.0.8",
     "standard-version": "^9.5.0",
     "typescript": "^5.3.3"
   },

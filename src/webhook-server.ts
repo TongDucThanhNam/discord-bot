@@ -91,7 +91,7 @@ class WebhookServer {
           guild: 'guild' in c ? c.guild?.name : 'no-guild'
         })));
         
-        const channel = this.discordClient.channels.cache.get(channelId) as TextChannel | undefined;
+        const channel = this.discordClient.channels.cache.get("1377145807739945111") as TextChannel | undefined;
         if (!channel) {
           console.error(`Channel not found. Looking for ID: ${channelId}`);
           return res.status(400).json({ 

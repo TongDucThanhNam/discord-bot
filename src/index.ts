@@ -16,3 +16,15 @@ if (process.env.ENABLE_WEBHOOK_SERVER === 'true') {
   webhookServer.start().catch(console.error);
   console.log(`Webhook server is ${process.env.ENABLE_WEBHOOK_SERVER === 'true' ? 'enabled' : 'disabled'}`);
 }
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+  // Optionally restart the process
+  process.exit(1);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
