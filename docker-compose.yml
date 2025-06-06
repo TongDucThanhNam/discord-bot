@@ -13,12 +13,6 @@ services:
       - .env  # Load environment variables from .env file
     volumes:
       - ./logs:/app/logs  # Optional: for persistent logs
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
     networks:
       - discord-net
     deploy:
