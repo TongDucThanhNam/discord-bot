@@ -28,6 +28,9 @@ ENV NODE_ENV=production
 # Expose the webhook port
 EXPOSE 3000
 
-# Run the application
+# Create a simple HTTP server for Koyeb health checks
+RUN echo 'const http = require("http"); const server = http.createServer((req, res) => { res.writeHead(200); res.end("OK"); }); server.listen(8080);' > /app/health.js
+
+# Run both the health check server and the main application
 USER bun
-CMD ["bun", "run", "dist/index.js"]
+CMD bun run health.js & bun run dist/index.js

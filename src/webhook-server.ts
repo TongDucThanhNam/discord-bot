@@ -55,8 +55,13 @@ class WebhookServer {
   }
 
   private initializeRoutes(): void {
-    // Health check endpoint
-    this.app.get('/health', (req: Request, res: Response) => {
+    // Health check endpoint for Koyeb
+    this.app.get('/', (_, res) => {
+      res.status(200).json({ status: 'ok' });
+    });
+    
+    // Health check endpoint (kept for backward compatibility)
+    this.app.get('/health', (_, res) => {
       res.status(200).json({ status: 'ok' });
     });
 
