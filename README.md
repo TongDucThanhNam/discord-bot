@@ -1,131 +1,131 @@
 # Dify-Discord-Starter 🤖✨
 
-Welcome to the **Dify-Discord-Starter** project! This is a modern and easy-to-use starter template for creating a Discord bot that integrates with the Dify app. Use this template to build your own bot and enable interactive chatting capabilities within your Discord community.
+Chào mừng bạn đến với dự án **Dify-Discord-Starter**! Đây là một mẫu khởi động hiện đại và dễ sử dụng để tạo một Discord bot tích hợp với ứng dụng Dify. Sử dụng mẫu này để xây dựng bot của riêng bạn và kích hoạt khả năng trò chuyện tương tác trong cộng đồng Discord của bạn.
 
 <p align="center">
-  <img src="assets/chatflow_demo.gif" alt="Chatflow Demo GIF" />
-  <i>Demo made with the <a href="assets\example_app.yml">Example Dify App</a></i>
+  <img src="assets/chatflow_demo.gif" alt="Demo Chatflow" />
+  <i>Demo được tạo bằng <a href="assets\example_app.yml">Ứng dụng Dify mẫu</a></i>
 </p>
 
-## Features 🚀
+## Tính năng chính 🚀
 
-- **Slash Command Support**: Users can interact with your bot using the `/chat` command directly in Discord.
-- **Integration with Dify**: Seamlessly send and receive messages through the Dify app.
-- **Ephemeral Responses**: Keep conversations private by sending ephemeral messages that only the command user can see.
-- **Simplified Bot Installation**: Easily add your bot to any Discord server with a single command.
-- **Versatile Application**: This starter is designed to work with all dify assistant types, from a basic assistant to an agent chatbot or a complex chatflow.
+- **Hỗ trợ Slash Command**: Người dùng có thể tương tác với bot bằng lệnh `/chat` trực tiếp trong Discord.
+- **Tích hợp với Dify**: Gửi và nhận tin nhắn liền mạch thông qua ứng dụng Dify.
+- **Phản hồi tạm thời**: Giữ cuộc trò chuyện riêng tư bằng cách gửi tin nhắn tạm thời chỉ người dùng lệnh mới có thể xem.
+- **Cài đặt bot đơn giản**: Dễ dàng thêm bot vào bất kỳ máy chủ Discord nào chỉ với một lệnh.
+- **Ứng dụng linh hoạt**: Mẫu khởi động này được thiết kế để hoạt động với mọi loại trợ lý Dify, từ trợ lý cơ bản đến chatbot agent hoặc chatflow phức tạp.
 
-## Prerequisites 📋
+## Yêu cầu trước khi cài đặt 📋
 
-Before you begin, ensure you have the following installed:
+Trước khi bắt đầu, hãy đảm bảo bạn đã cài đặt:
 
-- Node.js (v14 or higher)
-- npm (comes with Node.js)
+- Node.js (phiên bản 14 trở lên)
+- npm (đi kèm với Node.js)
 
-## Setup 🛠️
+## Hướng dẫn cài đặt 🛠️
 
-1. **Clone the Repository**
+1. **Sao chép kho lưu trữ**
 
    ```sh
    git clone https://github.com/your-username/dify-discord-starter.git
    cd dify-discord-starter
    ```
 
-2. **Environment Variables**
+2. **Cấu hình biến môi trường**
 
-   - Rename `.env-example` to `.env`.
-   - Fill in the environment variables with your own values.
+   - Đổi tên file `.env-example` thành `.env`.
+   - Điền các biến môi trường với giá trị của bạn.
 
    ```plaintext
-   DIFY_API_KEY="app..." # Your Dify API secret key
-   DIFY_API_BASE_URL="https://api.dify.ai/v1" # Your Dify instance base URL
-   DISCORD_BOT_TOKEN="" # Your Discord bot token from Discord Developer Portal
+   DIFY_API_KEY="app..." # Khóa bí mật API Dify của bạn
+   DIFY_API_BASE_URL="https://api.dify.ai/v1" # URL cơ sở của phiên bản Dify
+   DISCORD_BOT_TOKEN="" # Token bot Discord từ Discord Developer Portal
    ```
 
-3. **Install Dependencies**
+3. **Cài đặt các phụ thuộc**
 
    ```sh
    npm install
    ```
 
-4. **Build the Project**
+4. **Xây dựng dự án**
 
    ```sh
    npm run build
    ```
 
-5. **Start the Bot**
+5. **Khởi động bot**
 
    ```sh
    npm start
    ```
 
-   Upon startup, the bot will log a message in the console with a link to add the bot to your Discord server.
+   Khi khởi động, bot sẽ hiển thị một thông báo trong console chứa liên kết để thêm bot vào máy chủ Discord của bạn.
 
-6. **Add Your Bot to a Discord Server**
-   Use the provided link in the console to add your bot to a Discord server.
+6. **Thêm bot vào máy chủ Discord**
+   Sử dụng liên kết được cung cấp trong console để thêm bot vào máy chủ Discord.
 
-7. **Install Slash Commands**
+7. **Cài đặt lệnh Slash**
    ```sh
    npx ts-node scripts/install.ts <server-id>
    ```
-   Replace `<server-id>` with the ID of the server where you want to install the command.
+   Thay thế `<server-id>` bằng ID của máy chủ nơi bạn muốn cài đặt lệnh.
 
-## Usage 📖
+## Cách sử dụng 📖
 
-Once the bot is added to your server and the slash command is installed, you can interact with it using the `/chat` command. Simply type `/chat` followed by your message, and the bot will respond with an ephemeral reply from the Dify app.
+Sau khi đã thêm bot vào máy chủ và cài đặt lệnh slash, bạn có thể tương tác với nó bằng lệnh `/chat`. Chỉ cần nhập `/chat` theo sau là tin nhắn của bạn, và bot sẽ phản hồi bằng một tin nhắn tạm thời từ ứng dụng Dify.
 
-## Scripts 📜
+## Các lệnh 📜
 
-- `npm run build`: Compiles the TypeScript code to JavaScript, preparing it for execution.
-- `npm start`: Starts the bot using the compiled JavaScript code.
-- `npm run dev`: Runs the bot in development mode with hot reloading, ideal for development purposes.
-- `npm run install-cmd`: A shortcut script to run the install command script.
+- `npm run build`: Biên dịch mã TypeScript thành JavaScript, chuẩn bị cho việc thực thi.
+- `npm start`: Khởi động bot bằng mã JavaScript đã được biên dịch.
+- `npm run dev`: Chạy bot ở chế độ phát triển với tính năng tải lại nóng, lý tưởng cho mục đích phát triển.
+- `npm run install-cmd`: Lệnh tắt để chạy script cài đặt lệnh.
 
-## Dify variables
+## Biến Dify
 
-By default the discord bot will pass the name of the user to the assistant, within the dify variable `username` and the current date as UTC string within the dify variable `now`.
+Theo mặc định, bot Discord sẽ chuyển tên người dùng cho trợ lý thông qua biến Dify `username` và ngày giờ hiện tại dưới dạng chuỗi UTC trong biến Dify `now`.
 
-## Conversation History
+## Lịch sử hội thoại
 
-You can set the environment variable `HISTORY_MODE` to enable chat history. Currently the history is stored in memory, if you restart the bot, it will forget the history.
-Be aware that currently, there is no mechanic to clear or summarize the history. This means, that if users send too many messages, you might reach the token limit of the assistant.
+Bạn có thể đặt biến môi trường `HISTORY_MODE` để bật lịch sử trò chuyện. Hiện tại, lịch sử được lưu trữ trong bộ nhớ, nếu bạn khởi động lại bot, nó sẽ quên lịch sử.
+Lưu ý rằng hiện không có cơ chế để xóa hoặc tóm tắt lịch sử. Điều này có nghĩa là nếu người dùng gửi quá nhiều tin nhắn, bạn có thể đạt đến giới hạn token của trợ lý.
 
-If you do not set this variable, the bot will not remember messages - the bot will even forget the last message the bot has sent to the channel.
+Nếu bạn không đặt biến này, bot sẽ không nhớ các tin nhắn - thậm chí bot sẽ quên tin nhắn cuối cùng mà nó đã gửi đến kênh.
 
-### History per user
+### Lịch sử theo người dùng
 
-Set it to `user` if you want the bot to enable an own chat history for every user. The assistant will remember every message of the user accross channels and servers.
+Đặt thành `user` nếu bạn muốn bot bật lịch sử trò chuyện riêng cho từng người dùng. Trợ lý sẽ nhớ mọi tin nhắn của người dùng trên mọi kênh và máy chủ.
 
-### History per channel
+### Lịch sử theo kênh
 
-Set it to `channel` if you want the bot to enable a history for channels. The assistant will remember every message in the channe regardless from which user it came. You should use the dify variable "username" to allow the bot recognize the author of messages, otherwise the assistant will think all messages come from the same user.
+Đặt thành `channel` nếu bạn muốn bot bật lịch sử cho các kênh. Trợ lý sẽ nhớ mọi tin nhắn trong kênh bất kể từ người dùng nào gửi. Bạn nên sử dụng biến Dify "username" để cho phép bot nhận dạng tác giả của tin nhắn, nếu không trợ lý sẽ nghĩ rằng tất cả tin nhắn đều đến từ cùng một người dùng.
 
-Hint: If you use this, the userId of messages will no longer be the user but the server id, since dify does store conversations per user - if you share conversations accross users, you cannot pass the userid since dify would still create a unique conversation per user.
+Gợi ý: Nếu bạn sử dụng tùy chọn này, userId của tin nhắn sẽ không còn là người dùng mà là ID máy chủ, vì Dify lưu trữ các cuộc hội thoại theo người dùng - nếu bạn chia sẻ cuộc hội thoại giữa nhiều người dùng, bạn không thể chuyển userId vì Dify vẫn sẽ tạo một cuộc hội thoại duy nhất cho mỗi người dùng.
 
-## Triggering the bot
+## Cách kích hoạt bot
 
-There are three ways to trigger the bot:
+Có ba cách để kích hoạt bot:
 
-- application command: The bot will handle the `/chat` command if the application commands have been installed to the server and the user has permissions to use them.
-- mention: The bot will reply if it is mentioned in a message.
-- keywords: The bot will reply if a new message on a text channel contains a one of the configured keywords. The keywords are defined in the `TRIGGER_KEYWORDS` environment variable. This will only work if the bot has permission to read message contents, which must be enabled in the Discord Developer Portal, and the `MESSAGE_CONTENT_ALLOWED` environment variable must be set to `true`. Please read [Message-Content-Privileged-Intent-FAQ](https://support-dev.discord.com/hc/en-us/articles/4404772028055-Message-Content-Privileged-Intent-FAQ) if you want to use this. Use with caution, as this will trigger the bot on every message that the bot is able to read.
+- Lệnh ứng dụng: Bot sẽ xử lý lệnh `/chat` nếu các lệnh ứng dụng đã được cài đặt trên máy chủ và người dùng có quyền sử dụng chúng.
+- Đề cập: Bot sẽ phản hồi nếu nó được đề cập trong tin nhắn.
+- Từ khóa: Bot sẽ phản hồi nếu tin nhắn mới trên kênh văn bản chứa một trong các từ khóa đã cấu hình. Các từ khóa được định nghĩa trong biến môi trường `TRIGGER_KEYWORDS`. Điều này chỉ hoạt động nếu bot có quyền đọc nội dung tin nhắn, phải được bật trong Discord Developer Portal và biến môi trường `MESSAGE_CONTENT_ALLOWED` phải được đặt thành `true`. Vui lòng đọc [Message-Content-Privileged-Intent-FAQ](https://support-dev.discord.com/hc/en-us/articles/4404772028055-Message-Content-Privileged-Intent-FAQ) nếu bạn muốn sử dụng tính năng này. Hãy sử dụng cẩn thận, vì điều này sẽ kích hoạt bot trên mọi tin nhắn mà bot có thể đọc được.
 
-## Contributing 🤝
+## Đóng góp 🤝
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Đóng góp là yếu tố tạo nên một cộng đồng mã nguồn mở tuyệt vời để học hỏi, truyền cảm hứng và sáng tạo. Mọi đóng góp của bạn đều **được đánh giá cao**.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Fork Dự án
+2. Tạo Nhánh Tính năng của bạn (`git checkout -b feature/TinhNangMoi`)
+3. Commit các Thay đổi của bạn (`git commit -m 'Thêm một số Tính năng Mới'`)
+4. Đẩy lên Nhánh (`git push origin feature/TinhNangMoi`)
+5. Mở một Yêu cầu Kéo (Pull Request)
 
-## License 📝
+## Giấy phép 📝
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Phân phối theo Giấy phép MIT. Xem tệp `LICENSE` để biết thêm thông tin.
 
-## Acknowledgements 🙏
+## Lời cảm ơn 🙏
 
 - [Discord.js](https://discord.js.org/#/)
 - [Dify.ai](https://dify.ai/)
@@ -133,6 +133,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-Happy Coding! 🎉👩‍💻👨‍💻
+Chúc bạn lập trình vui vẻ! 🎉👩‍💻👨‍💻
 
-_Note: This is a starter project and is not affiliated with the official Dify platform or Discord._
+_Ghi chú: Đây là một dự án khởi động và không liên kết chính thức với nền tảng Dify hoặc Discord._
