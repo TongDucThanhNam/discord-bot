@@ -34,16 +34,8 @@ COPY --chown=bunuser:bunuser --from=builder /app/dist ./dist
 COPY --chown=bunuser:bunuser package.json .
 COPY --chown=bunuser:bunuser --from=builder /app/.env* ./
 
-# Tạo một HTTP server đơn giản để kiểm tra tình trạng hoạt động
-RUN echo 'const http = require("http"); \
-const server = http.createServer((req, res) => { \
-  res.writeHead(200); \
-  res.end("OK"); \
-}); \
-server.listen(8080);' > /app/health.js
-
 # Mở cổng cho webhook
 EXPOSE 3000
 
 # Chạy cả health check và ứng dụng chính
-CMD bun run health.js & bun run dist/index.js
+CMD bun run dist/index.js
