@@ -14,7 +14,7 @@ FROM base AS deps
 # Chỉ copy các file cần thiết để cài đặt phụ thuộc
 COPY --chown=bunuser:bunuser package.json bun.lock* ./
 # Cài đặt các phụ thuộc (bao gồm cả devDependencies)
-RUN bun install --frozen-lockfile --production=false
+RUN bun install
 
 # Giai đoạn 3: Build ứng dụng
 FROM deps AS builder
