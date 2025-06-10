@@ -50,12 +50,16 @@ export async function execute(interaction: CommandInteraction) {
     }
 
     try {
-      // Tạo embed để hiển thị ảnh và chú thích
+      // Tạo embed để hiển thị ảnh, chú thích và thông tin người gửi
       const embed = new EmbedBuilder()
-        .setImage('attachment://image.png');  // Đặt ảnh cho embed
-      
-      // Thêm chú thích vào mô tả của embed với tiền tố 'Nội dung:'
-      embed.setDescription(`Nội dung: ${caption}`);
+        .setImage('attachment://image.png')  // Đặt ảnh cho embed
+        .setAuthor({
+          name: interaction.user.tag,
+          iconURL: interaction.user.displayAvatarURL()
+        })
+        .setDescription(`**Nội dung:** ${caption}`)
+        .setFooter({ text: `ID: ${interaction.user.id}` })
+        .setTimestamp();
       
       // Gửi embed chứa ảnh và chú thích đến kênh đích
       await (targetChannel as TextChannel).send({
