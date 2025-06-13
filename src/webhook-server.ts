@@ -74,6 +74,27 @@ class WebhookServer {
   // Parse bank transfer message into TransferMoney object
   private parseTransferMessage(message: string): TransferMoney {
     console.log('Message:', message);
+
+    // Techcombank:
+    if (message.includes('19036915591014')) {
+      const techcombankRegex = /tk (\d+)\s+so tien gd:([+-][\d,]+)\s+so du:([\d,]+)\s+(.*)/;
+      const match = message.match(techcombankRegex);
+
+      if (!match || match.length < 5) {
+        throw new Error("không thể parse thông báo techcombank");
+      }
+
+      return {
+        accountNumber: match[1], // 19036915591014
+        amount: match[2],       // +3,504,600 or -3,858,750
+        time: new Date().toLocaleString('vi-VN'), // Current time since not provided in message
+        balance: match[3],      // 67,832,506 or 42,767,756
+        content: match[4]       // Transaction description
+      };
+    }
+
+
+    // Vietcombank:
     const regex = /sd tk (\d+) ([+-]?[\d,]+)vnd luc (\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2}(?:\.\d+)?)\. sd ([\d,]+)vnd\. ref (.*)/i;
     const match = message.match(regex);
 
@@ -188,7 +209,7 @@ class WebhookServer {
           fields: [
             {
               name: '🏦 Ngân hàng',
-              value: 'VCB (Vietcombank)',
+              value: bankTransaction.accountNumber.startsWith('19036915591014') ? 'Techcombank' : 'Vietcombank',
               inline: true
             },
             {
@@ -198,7 +219,7 @@ class WebhookServer {
             },
             {
               name: '💳 Số tài khoản',
-              value: bankTransaction.accountNumber,
+              value: bankTransaction.accountNumber.startsWith('19036915591014') ? '19036915591014 (Cty)' : bankTransaction.accountNumber,
               inline: true
             },
             {
