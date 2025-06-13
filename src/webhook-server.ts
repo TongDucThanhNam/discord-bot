@@ -74,7 +74,7 @@ class WebhookServer {
   // Parse bank transfer message into TransferMoney object
   private parseTransferMessage(message: string): TransferMoney {
     console.log('Message:', message);
-    const regex = /sd tk (\d+) \+?([\d,]+)vnd luc (\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2}(?:\.\d+)?)\. sd ([\d,]+)vnd\. ref (.*)/i;
+    const regex = /sd tk (\d+) ([+-]?[\d,]+)vnd luc (\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2}(?:\.\d+)?)\. sd ([\d,]+)vnd\. ref (.*)/i;
     const match = message.match(regex);
 
     // console.log('Parsed values:', { match });
@@ -85,9 +85,9 @@ class WebhookServer {
   
     return {
       accountNumber: match[1], // 1014124319
-      amount: '+' + match[2].replace(/,/g, ''), // +24818747 (already positive in the message)
-      time: match[3].split('.')[0],           // 13-06-2025 09:11:28 (remove milliseconds if present)
-      balance: match[4].replace(/,/g, ''),     // 26132642 (remove commas)
+      amount: match[2], // +24818747 (already positive in the message)
+      time: match[3],           // 13-06-2025 09:11:28 (remove milliseconds if present)
+      balance: match[4],     // 26132642 (remove commas)
       content: match[5]         // 020097042206130911272025DKU1333947.87710.091128.PHAM VAN HOANG chuyen tien
     };
   }
@@ -161,12 +161,12 @@ class WebhookServer {
         }
 
         // Log thông tin các kênh có sẵn để debug
-        console.log('Các kênh có sẵn:', this.discordClient.channels.cache.map(c => ({
-          id: c.id,
-          type: c.type,
-          name: 'name' in c ? c.name : 'no-name',
-          guild: 'guild' in c ? c.guild?.name : 'no-guild'
-        })));
+        // console.log('Các kênh có sẵn:', this.discordClient.channels.cache.map(c => ({
+        //   id: c.id,
+        //   type: c.type,
+        //   name: 'name' in c ? c.name : 'no-name',
+        //   guild: 'guild' in c ? c.guild?.name : 'no-guild'
+        // })));
         
         // Lấy kênh Discord theo ID cứng (hardcoded)
         const channel = this.discordClient.channels.cache.get("1377145807739945111") as TextChannel | undefined;
@@ -203,7 +203,7 @@ class WebhookServer {
             },
             {
               name: '💰 Số tiền',
-              value: bankTransaction.amount,
+              value: bankTransaction.amount, 
               inline: true
             },
             {
