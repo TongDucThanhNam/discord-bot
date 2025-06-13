@@ -74,7 +74,7 @@ class WebhookServer {
   // Parse bank transfer message into TransferMoney object
   private parseTransferMessage(message: string): TransferMoney {
     console.log('Message:', message);
-    const regex = /so du tk vcb (\d+) ([+-][\d,]+) vnd luc (\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2})\. so du ([\d,]+) vnd\. ref (.*)/;
+    const regex = /SD TK (\d+) \+?([\d,]+)VND luc (\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2}(?:\.\d+)?)\. SD ([\d,]+)VND\. Ref (.*)/;
     const match = message.match(regex);
 
     // console.log('Parsed values:', { match });
@@ -84,11 +84,11 @@ class WebhookServer {
     }
   
     return {
-      accountNumber: match[1], // 9869887363
-      amount: match[2],         // +45,000 hoặc -29,000,000
-      time: match[3],           // 08-06-2025 14:09:03
-      balance: match[4],        // 51,970,619
-      content: match[5]         // Phần sau "Ref"
+      accountNumber: match[1], // 1014124319
+      amount: '+' + match[2].replace(/,/g, ''), // +24818747 (already positive in the message)
+      time: match[3].split('.')[0],           // 13-06-2025 09:11:28 (remove milliseconds if present)
+      balance: match[4].replace(/,/g, ''),     // 26132642 (remove commas)
+      content: match[5]         // 020097042206130911272025DKU1333947.87710.091128.PHAM VAN HOANG chuyen tien
     };
   }
 
