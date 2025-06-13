@@ -74,7 +74,7 @@ class WebhookServer {
   // Parse bank transfer message into TransferMoney object
   private parseTransferMessage(message: string): TransferMoney {
     console.log('Message:', message);
-    const regex = /SD TK (\d+) \+?([\d,]+)VND luc (\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2}(?:\.\d+)?)\. SD ([\d,]+)VND\. Ref (.*)/;
+    const regex = /sd tk (\d+) \+?([\d,]+)vnd luc (\d{2}-\d{2}-\d{4} \d{2}:\d{2}:\d{2}(?:\.\d+)?)\. sd ([\d,]+)vnd\. ref (.*)/i;
     const match = message.match(regex);
 
     // console.log('Parsed values:', { match });
